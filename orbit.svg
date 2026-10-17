@@ -1,22 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="100%" height="100%" viewBox="0 0 1000 600">
-  <rect width="1000" height="600" fill="#080808"/>
-  <circle cx="500" cy="210" r="48"
-          fill="none" stroke="white" stroke-width="9"/>
-  <ellipse cx="500" cy="210" rx="80" ry="22"
-           fill="none" stroke="white" stroke-width="4"
-           transform="rotate(-25 500 210)"/>
-  <text x="500" y="325" text-anchor="middle"
-        fill="white" font-family="Arial" font-size="54">
-    Orbit
-  </text>
-  <a href="https://orbitontop.fancylarch8.chatgpt.site/"
-     target="_blank" rel="noopener noreferrer">
-    <rect x="390" y="370" width="220" height="60"
-          rx="16" fill="white"/>
-    <text x="500" y="409" text-anchor="middle"
-          fill="black" font-family="Arial" font-size="22">
-      Open Orbit ↗
-    </text>
-  </a>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="display:block;width:100vw;height:100vh;background:#000">
+<foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" style="height:100vh;width:100%;margin:0;background:#000;color:white;font:16px system-ui">
+<p id="status" style="padding:32px">Starting Orbit…</p><iframe id="app" title="Orbit" allow="fullscreen; gamepad" style="display:none;width:100%;height:100%;border:0"></iframe></div></foreignObject>
+<script><![CDATA[
+(async()=>{
+ const status=document.getElementById('status'),frame=document.getElementById('app');
+ try{
+  if(!navigator.serviceWorker)throw Error('This browser does not allow service workers here.');
+  const base=new URL('./',location.href);
+  if(base.pathname!=='/gh/Megatron963/Orbit@main/')throw Error('Use https://cdn.jsdelivr.net/gh/Megatron963/Orbit@main/orbit.svg');
+  const registration=await navigator.serviceWorker.register(new URL('orbit-sw.js',base),{scope:base.href,updateViaCache:'none'});
+  await Promise.race([new Promise((resolve,reject)=>{const sw=registration.installing||registration.waiting||registration.active;if(!sw)return reject(Error('Worker installation did not start.'));const check=()=>{if(sw.state==='activated')resolve();if(sw.state==='redundant')reject(Error('Worker installation failed. Check that all folders were uploaded.'));};sw.addEventListener('statechange',check);check();}),new Promise((_,reject)=>setTimeout(()=>reject(Error('Worker startup timed out.')),30000))]);
+  if(!navigator.serviceWorker.controller)await Promise.race([new Promise(resolve=>{const check=()=>{if(navigator.serviceWorker.controller){navigator.serviceWorker.removeEventListener('controllerchange',check);resolve()}};navigator.serviceWorker.addEventListener('controllerchange',check);check()}),new Promise((_,reject)=>setTimeout(()=>reject(Error('Browser did not give the worker control. Reload this page.')),10000))]);
+  frame.onload=()=>{status.hidden=true;frame.style.display='block'};frame.src=new URL('app',base).href;
+ }catch(error){status.textContent='Orbit could not start: '+error.message;}
+})();
+]]></script></svg>
