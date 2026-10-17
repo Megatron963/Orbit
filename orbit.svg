@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%" height="100%" viewBox="0 0 1000 600">
+  <rect width="1000" height="600" fill="#080808"/>
+  <circle cx="500" cy="210" r="48"
+          fill="none" stroke="white" stroke-width="9"/>
+  <ellipse cx="500" cy="210" rx="80" ry="22"
+           fill="none" stroke="white" stroke-width="4"
+           transform="rotate(-25 500 210)"/>
+  <text x="500" y="325" text-anchor="middle"
+        fill="white" font-family="Arial" font-size="54">
+    Orbit
+  </text>
+  <a href="https://orbitontop.fancylarch8.chatgpt.site/"
+     target="_blank" rel="noopener noreferrer">
+    <rect x="390" y="370" width="220" height="60"
+          rx="16" fill="white"/>
+    <text x="500" y="409" text-anchor="middle"
+          fill="black" font-family="Arial" font-size="22">
+      Open Orbit ↗
+    </text>
+  </a>
+</svg>
